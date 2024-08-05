@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms and Conditions - FREELANCER</title>
+  <style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-image: url("images/Freelancer/Free1.jpg");
+        background-size: cover;
+        background-position: center;
+        color: #fff;
+        overflow: hidden; /* Hide overflow to show preloader correctly */
+    }
+
+    header {
+        background: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+        padding: 20px;
+        text-align: center;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 10;
+    }
+
+    main {
+        padding: 80px 20px 20px; /* Adjust padding to accommodate fixed header */
+    }
+
+    section {
+        background: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
+        border-radius: 8px;
+        padding: 20px;
+        margin: 10px 0;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: reveal 0.6s ease-out forwards;
+    }
+
+    @keyframes reveal {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    header h1, header p {
+        color: #fff;
+    }
+
+    section:nth-child(odd) {
+        animation-delay: 0.2s;
+    }
+
+    section:nth-child(even) {
+        animation-delay: 0.4s;
+    }
+
+    #acceptance-checkbox {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    #accept-terms {
+        margin-right: 10px;
+    }
+
+    /* Preloader styles */
+    .preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8); /* Dark background with opacity */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 100;
+        color: #fff;
+    }
+
+    .preloader .spinner {
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top: 4px solid #fff;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="preloader" id="preloader">
+    <div class="spinner"></div>
+    <p>Loading...</p>
+  </div>
+  <header>
+    <h1>Terms and Conditions</h1>
+  </header>
+  <main>
+    <section id="intro">
+      <h2>Introduction</h2>
+      <p>Welcome to FREELANCER, a platform that connects freelancers with clients who need their services. These Terms and Conditions ("Terms") outline the rules and guidelines for using our platform, and are a binding agreement between you and FREELANCER.</p>
+    </section>
+    <section id="acceptance">
+      <h2>Acceptance of Terms</h2>
+      <p>By accessing or using our platform, you acknowledge that you have read, understood, and agree to be bound by these Terms. If you do not agree to these Terms, please do not use our platform.</p>
+    </section>
+    <section id="eligibility">
+      <h2>Eligibility</h2>
+      <p>To use our platform, you must be at least 18 years old and have the legal capacity to enter into a binding agreement. You must also provide accurate and complete information when creating an account.</p>
+    </section>
+    <section id="warranty-disclaimer">
+      <h2>Warranty Disclaimer</h2>
+      <p>Our platform is provided "as is" and "as available," without warranties of any kind, express or implied.</p>
+    </section>
+    <section id="limitation-liability">
+      <h2>Limitation of Liability</h2>
+      <p>In no event will we be liable for any damages, including but not limited to incidental, consequential, or punitive damages, arising out of your use of our platform.</p>
+    </section>
+    <section id="governing-law">
+      <h2>Governing Law</h2>
+      <p>These Terms will be governed by and construed in accordance with the laws of [Insert State/Country].</p>
+    </section>
+    <section id="changes-terms">
+      <h2>Changes to Terms</h2>
+      <p>We reserve the right to modify these Terms at any time, without notice. It is your responsibility to review these Terms regularly for any changes.</p>
+    </section>
+    <section id="contact-us">
+      <h2>Contact Us</h2>
+      <p>If you have any questions or concerns about these Terms, please contact us at [Insert Contact Information].</p>
+    </section>
+    <section id="acceptance-checkbox">
+      <input type="checkbox" id="accept-terms">
+      <label for="accept-terms">I have read, understood, and agree to be bound by these Terms and Conditions.</label>
+    </section>
+  </main>
+  <script>
+    // Simulate preloader delay and remove preloader
+    window.addEventListener('load', () => {
+      const preloader = document.getElementById('preloader');
+      setTimeout(() => {
+        preloader.style.opacity = '0';
+        setTimeout(() => {
+          preloader.style.display = 'none';
+          document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }, 500); // Match this with the preloader fade-out duration
+      }, 1000); // Adjust this for preloader duration
+    });
+  </script>
+</body>
+</html>
+

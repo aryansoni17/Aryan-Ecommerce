@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelancer</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url("images/Freelancer/Free1.jpg");
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        /* Preloader styles */
+        #preloader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #007bff;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Hide preloader once content is loaded */
+        .loaded #preloader {
+            display: none;
+        }
+
+        .blur-box {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(10px);
+        }
+
+        .login-box {
+            position: relative;
+            width: 400px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            opacity: 0;
+            transform: scale(0.9);
+            animation: fadeInScale 1s ease-out forwards;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .login-box h2 {
+            margin: 0 0 20px;
+            text-align: center;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .login-box label {
+            display: block;
+            margin-bottom: 5px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .login-box input[type="text"], .login-box input[type="password"], .login-box input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .login-box input[type="text"]:focus, .login-box input[type="password"]:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        .login-box input[type="submit"] {
+            background: #007bff;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .login-box input[type="submit"]:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .login-box a {
+            text-decoration: none;
+            color: #007bff;
+            transition: color 0.3s;
+        }
+
+        .login-box a:hover {
+            color: #0056b3;
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <div class="blur-box"></div>
+    <form id="login-form" class="login-box" onsubmit="handleLogin(event)">
+        <h2>Login to FREELANCER</h2>
+        <div class="error-message" id="error-message"></div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" placeholder="Enter your username"><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password"><br>
+        <a href="forgot.html" id="forgot-password">Forgot Password?</a><br><br>
+        <input type="submit" value="Login" id="login-btn">
+        <p>Don't have an account? <a href="signup.html" id="signup-link">Sign up now</a></p>
+    </form>
+
+    <script>
+        // Wait for the entire page to load
+        window.addEventListener('load', function () {
+            document.body.classList.add('loaded');
+        });
+
+        // Handle form submission
+        function handleLogin(event) {
+            event.preventDefault(); // Prevent the default form submission
+            
+            // Get input values
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const errorMessage = document.getElementById('error-message');
+
+            // Hardcoded username and password for demonstration
+            const validUsername = 'user';
+            const validPassword = 'password';
+
+            // Validate input fields
+            if (username === '' || password === '') {
+                errorMessage.textContent = 'Please fill out all fields.';
+                return;
+            }
+
+            // Validate login details
+            if (username === validUsername && password === validPassword) {
+                // If validation passes, redirect to home page
+                window.location.href = "home.html";
+            } else {
+                errorMessage.textContent = 'Incorrect username or password.';
+            }
+        }
+    </script>
+</body>
+</html>

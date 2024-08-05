@@ -1,0 +1,45 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FREELANCER</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <video id="entry-video" autoplay loop muted>
+      <source src="entry-video.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </header>
+  <main>
+    <!-- Add a overlay or a container to display the video frames -->
+    <div id="video-overlay">
+      <!-- Add the video frames here -->
+      <div class="video-frame" style="background-image: url('frame-0.jpg');"> <!-- 0 second frame -->
+        <h1>2</h1>
+        <p>S E HU MA 2 S E HU MA</p>
+      </div>
+      <div class="video-frame" style="background-image: url('frame-1.jpg');"> <!-- 1 second frame -->
+        <h1>FREELANCER</h1>
+        <p>HU MAI.... FREELANCER HU MAI ....</p>
+      </div>
+      <div class="video-frame" style="background-image: url('frame-2.jpg');"> <!-- 2 second frame -->
+        <h1>2 Ꭰ</h1>
+        <p>FREELANCER HU MAI.... 2 Ꭰ FREELANCER HU MAI ...</p>
+      </div>
+      <!-- Add more video frames here -->
+    </div>
+  </main>
+
+  <script>
+    const video = document.getElementById('entry-video');
+    video.addEventListener('ended', function() {
+      window.location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>

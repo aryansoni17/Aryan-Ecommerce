@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - FREELANCER</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url("images/Freelancer/Free1.jpg");
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            overflow: auto; /* Allow scrolling */
+        }
+
+        /* Preloader styles */
+        #preloader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #007bff;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Hide preloader once content is loaded */
+        .loaded #preloader {
+            display: none;
+        }
+
+        .blur-box {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(10px);
+            z-index: 0; /* Ensure blur-box is behind the content */
+        }
+
+        .signup-box {
+            position: relative;
+            width: 500px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            opacity: 0;
+            transform: scale(0.9);
+            animation: fadeInScale 1s ease-out forwards;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .signup-box h2 {
+            margin: 0 0 20px;
+            text-align: center;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .signup-box label {
+            display: block;
+            margin-bottom: 5px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .signup-box input[type="text"], .signup-box input[type="password"], .signup-box input[type="email"], .signup-box input[type="tel"], .signup-box textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .signup-box input[type="text"]:focus, .signup-box input[type="password"]:focus, .signup-box input[type="email"]:focus, .signup-box input[type="tel"]:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        .signup-box input[type="submit"] {
+            background: #007bff;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .signup-box input[type="submit"]:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .signup-box a {
+            text-decoration: none;
+            color: #007bff;
+            transition: color 0.3s;
+        }
+
+        .signup-box a:hover {
+            color: #0056b3;
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* Ensure the content does not overflow the viewport */
+        .signup-box textarea {
+            height: 100px; /* Adjust as needed */
+            resize: vertical; /* Allow vertical resizing only */
+        }
+    </style>
+</head>
+<body>
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <div class="blur-box"></div>
+    <form id="signup-form" class="signup-box" onsubmit="handleSignup(event)">
+        <h2>Sign up for FREELANCER</h2>
+        <div class="error-message" id="error-message"></div>
+        <label for="firstname">First Name:</label>
+        <input type="text" id="firstname" name="firstname" placeholder="Enter your first name"><br>
+        <label for="lastname">Last Name:</label>
+        <input type="text" id="lastname" name="lastname" placeholder="Enter your last name"><br>
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email address"><br>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" placeholder="Choose a unique username"><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter a strong password"><br>
+        <label for="confirm-password">Confirm Password:</label>
+        <input type="password" id="confirm-password" name="confirm-password" placeholder="Re-enter your password"><br>
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number"><br>
+        <label for="skills">Skills:</label>
+        <textarea id="skills" name="skills" placeholder="List your skills, separated by commas"></textarea><br>
+        <input type="checkbox" id="terms" name="terms">
+        <label for="terms">I agree to the <a href="terms.html" id="terms-link">Terms and Conditions</a></label><br><br>
+        <input type="submit" value="Sign up" id="signup-btn">
+        <p>Already have an account? <a href="login.html" id="login-link">Login now</a></p>
+    </form>
+
+    <script>
+        // Wait for the entire page to load
+        window.addEventListener('load', function () {
+            document.body.classList.add('loaded');
+        });
+
+        // Handle form submission
+        function handleSignup(event) {
+            event.preventDefault(); // Prevent the default form submission
+            
+            // Get input values
+            const firstname = document.getElementById('firstname').value.trim();
+            const lastname = document.getElementById('lastname').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const confirmPassword = document.getElementById('confirm-password').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const skills = document.getElementById('skills').value.trim();
+            const terms = document.getElementById('terms').checked;
+            const errorMessage = document.getElementById('error-message');
+
+            // Validate input fields
+            if (firstname === '' || lastname === '' || email === '' || username === '' || password === '' || confirmPassword === '' || phone === '' || skills === '') {
+                errorMessage.textContent = 'Please fill out all fields.';
+                return;
+            }
+
+            // Validate password confirmation
+            if (password !== confirmPassword) {
+                errorMessage.textContent = 'Passwords do not match.';
+                return;
+            }
+
+            // Validate terms agreement
+            if (!terms) {
+                errorMessage.textContent = 'You must agree to the terms and conditions.';
+                return;
+            }
+
+            // If validation passes, redirect to a success page or handle signup logic
+            alert('Sign up successful!');
+            window.location.href = "home.html"; // Redirect to home page or another page
+        }
+    </script>
+</body>
+</html>
