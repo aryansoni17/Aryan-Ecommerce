@@ -7,14 +7,17 @@
     <style>
         body {
             margin: 0;
-            height: 100vh;
+            font-family: 'Roboto', sans-serif;
+            background-image: url("images/Freelancer/Free2.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-image: url("images/Freelancer/Free1.jpg");
-            background-size: cover;
-            background-position: center;
-            font-family: Arial, sans-serif;
+            height: 100vh;
             overflow: hidden;
         }
 
@@ -35,7 +38,7 @@
         .loader {
             border: 16px solid #f3f3f3;
             border-radius: 50%;
-            border-top: 16px solid #007bff;
+            border-top: 16px solid #ff00ff;
             width: 120px;
             height: 120px;
             animation: spin 2s linear infinite;
@@ -61,12 +64,11 @@
         }
 
         .login-box {
-            position: relative;
             width: 400px;
             padding: 40px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.8); /* Transparent black background */
+            border-radius: 20px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
             z-index: 1;
             opacity: 0;
             transform: scale(0.9);
@@ -74,37 +76,45 @@
         }
 
         @keyframes fadeInScale {
-            from {
+            0% {
                 opacity: 0;
                 transform: scale(0.9);
             }
-            to {
+            100% {
                 opacity: 1;
                 transform: scale(1);
             }
         }
 
         .login-box h2 {
+            font-family: 'Montserrat', sans-serif;
             margin: 0 0 20px;
             text-align: center;
-            animation: slideIn 0.5s ease-out;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateY(-20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            background: rgba(255, 0, 255, 0.8);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+            animation: pulse 1.5s infinite;
+            color: #fff;
+            text-shadow: 2px 2px #000;
         }
 
         .login-box label {
             display: block;
             margin-bottom: 5px;
-            animation: fadeIn 0.5s ease-out;
+            color: #ff00ff;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .login-box input[type="text"], .login-box input[type="password"], .login-box input[type="submit"] {
@@ -112,36 +122,39 @@
             padding: 10px;
             margin-bottom: 10px;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 10px;
             transition: all 0.3s ease;
         }
 
         .login-box input[type="text"]:focus, .login-box input[type="password"]:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            border-color: #ff00ff;
+            box-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
         }
 
         .login-box input[type="submit"] {
-            background: #007bff;
+            background: #00ffff;
             border: none;
-            color: white;
+            color: #000;
             cursor: pointer;
-            transition: background 0.3s, transform 0.3s;
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .login-box input[type="submit"]:hover {
-            background: #0056b3;
-            transform: scale(1.05);
+            background: #ff00ff;
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
         }
 
         .login-box a {
             text-decoration: none;
-            color: #007bff;
-            transition: color 0.3s;
+            color: #ff00ff;
+            transition: color 0.3s, transform 0.3s;
         }
 
         .login-box a:hover {
-            color: #0056b3;
+            color: #00ffff;
+            transform: scale(1.1) rotate(-5deg);
         }
 
         .error-message {
@@ -197,7 +210,7 @@
             // Validate login details
             if (username === validUsername && password === validPassword) {
                 // If validation passes, redirect to home page
-                window.location.href = "home.html";
+                window.location.href = "main.html";
             } else {
                 errorMessage.textContent = 'Incorrect username or password.';
             }

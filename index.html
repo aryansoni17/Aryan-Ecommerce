@@ -3,9 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home - FREELANCER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-image: url("images/StockCake-Astronaut\ Space\ Float_1722793844.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #fff;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        nav {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #ff00ff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: 700;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #00ffff;
+            transform: scale(1.2) rotate(-10deg);
+        }
+
+        .container {
+            padding: 100px 20px 20px;
+            text-align: center;
+        }
+
+        .welcome {
+            margin: 20px 0;
+            position: relative;
+            z-index: 5;
+            animation: slideIn 1s ease-out;
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px) rotate(-10deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 4px 25px rgba(255, 0, 255, 0.4);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 6px 30px rgba(0, 255, 255, 0.7);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 4px 25px rgba(255, 0, 255, 0.4);
+            }
+        }
+
+        .welcome h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3em;
+            background: rgba(255, 0, 255, 0.8);
+            padding: 20px;
+            border-radius: 20px;
+            display: inline-block;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+            animation: pulse 1.5s infinite;
+            color: #fff;
+            text-shadow: 2px 2px #000;
+        }
+
+        .welcome p {
+            font-size: 1.3em;
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 15px;
+            background: rgba(0, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .feature {
+            margin: 15px;
+            padding: 30px;
+            width: 300px;
+            text-align: center;
+            background: rgba(255, 165, 0, 0.8);
+            border-radius: 20px;
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            color: #000;
+        }
+
+        .feature h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.7em;
+            margin-bottom: 15px;
+            transition: opacity 0.3s, color 0.3s;
+            color: #fff;
+            text-shadow: 1px 1px #000;
+        }
+
+        .feature p {
+            font-size: 1.1em;
+            line-height: 1.4;
+            color: #222;
+        }
+
+        .feature:hover {
+            transform: translateY(-15px) rotate(5deg);
+            background: rgba(255, 105, 180, 0.9);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .feature:hover h3 {
+            color: #00ffff;
+        }
+
+        .cta {
+            margin-top: 40px;
+        }
+
+        .cta a {
+            display: inline-block;
+            background: #00ffff;
+            color: #000;
+            padding: 15px 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            margin: 10px;
+            font-size: 1.3em;
+            font-weight: 700;
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta a:hover {
+            background: #ff00ff;
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .hidden {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="container" id="welcome">
+        <div class="welcome">
+            <h1>Welcome to FREELANCER</h1>
+            <p>Your go-to platform for connecting with talented freelancers and clients. 
+                Whether you're looking to offer your services or find the perfect freelancer for your project, FREELANCER has you covered.</p>
+        </div>
+        <div class="features" id="features">
+            <div class="feature hidden">
+                <h3>Find Talent</h3>
+                <p>Browse through profiles and portfolios to find the right freelancer for your project.</p>
+            </div>
+            <div class="feature hidden">
+                <h3>Offer Services</h3>
+                <p>Create a profile, list your skills, and start offering your services to clients worldwide.</p>
+            </div>
+            <div class="feature hidden">
+                <h3>Secure Payments</h3>
+                <p>Enjoy secure and reliable payment options for all your freelance transactions.</p>
+            </div>
+        </div>
+        <div class="cta" id="cta">
+            <a href="signup.html">Sign Up</a>
+            <a href="login.html">Login</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const features = document.querySelectorAll('.feature');
+
+            const revealFeatures = () => {
+                features.forEach((feature, index) => {
+                    const rect = feature.getBoundingClientRect();
+                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                        feature.style.transitionDelay = `${index * 0.2}s`;
+                        feature.classList.add('visible');
+                        feature.classList.remove('hidden');
+                    }
+                });
+            };
+
+            revealFeatures(); // Run the reveal function once at the start
+
+            window.addEventListener('scroll', revealFeatures);
+        });
+    </script>
 </body>
 </html>

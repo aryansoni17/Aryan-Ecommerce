@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelancer Profiles - FREELANCER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-image: url("images/StockCake-Astronaut Space Float_1722793844.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #fff;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+        header h1 {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            color: #ff00ff;
+            font-size: 2.5em;
+        }
+
+        nav {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #ff00ff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: 700;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #00ffff;
+            transform: scale(1.2) rotate(-10deg);
+        }
+
+        .container {
+            padding: 100px 20px 20px;
+            text-align: center;
+        }
+
+        .welcome {
+            margin: 20px 0;
+            position: relative;
+            z-index: 5;
+            animation: slideIn 1s ease-out;
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px) rotate(-10deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 4px 25px rgba(255, 0, 255, 0.4);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 6px 30px rgba(0, 255, 255, 0.7);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 4px 25px rgba(255, 0, 255, 0.4);
+            }
+        }
+
+        .welcome h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3em;
+            background: rgba(255, 0, 255, 0.8);
+            padding: 20px;
+            border-radius: 20px;
+            display: inline-block;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+            animation: pulse 1.5s infinite;
+            color: #fff;
+            text-shadow: 2px 2px #000;
+        }
+
+        .welcome p {
+            font-size: 1.3em;
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 15px;
+            background: rgba(0, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .profile {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            width: 300px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .profile img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .profile:hover img {
+            transform: scale(1.1);
+        }
+
+        .profile-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .profile-info h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #007bff;
+        }
+
+        .profile-info p {
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        .profile:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Popup Styles */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 500px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .popup.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #007bff;
+        }
+
+        .popup p {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .popup .actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .popup button {
+            background: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .popup button:hover {
+            background: #0056b3;
+        }
+
+        .popup button.cancel {
+            background: #ff4d4d;
+        }
+
+        .popup button.cancel:hover {
+            background: #cc0000;
+        }
+
+        /* Overlay Styles */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>FREELANCER</h1>
+    </header>
+    <div class="container">
+        <div class="profile-grid">
+            <!-- Freelancer Profiles -->
+            <div class="profile" onclick="showPopup('John Doe', 'Web Developer with 5 years of experience.')">
+                <img src="images/photo_1_2024-08-22_19-53-24.jpg" alt="John Doe">
+                <div class="profile-info">
+                    <h3>John Doe</h3>
+                    <p>Web Developer</p>
+                </div>
+            </div>
+
+            <div class="profile" onclick="showPopup('Jane Smith', 'Graphic Designer specializing in branding.')">
+                <img src="images/photo_2_2024-08-22_19-53-24.jpg" alt="Jane Smith">
+                <div class="profile-info">
+                    <h3>Jane Smith</h3>
+                    <p>Graphic Designer</p>
+                </div>
+            </div>
+
+            <div class="profile" onclick="showPopup('Mark Johnson', 'Content Writer with a passion for storytelling.')">
+                <img src="images/photo_3_2024-08-22_19-53-24.jpg" alt="Mark Johnson">
+                <div class="profile-info">
+                    <h3>Mark Johnson</h3>
+                    <p>Content Writer</p>
+                </div>
+            </div>
+
+            <div class="profile" onclick="showPopup('Lisa Brown', 'SEO Expert with a track record of success.')">
+                <img src="images/photo_4_2024-08-22_19-53-24.jpg" alt="Lisa Brown">
+                <div class="profile-info">
+                    <h3>Lisa Brown</h3>
+                    <p>SEO Expert</p>
+                </div>
+            </div>
+
+            <div class="profile" onclick="showPopup('Tom Clark', 'UI/UX Designer creating intuitive interfaces.')">
+                <img src="images/photo_5_2024-08-22_19-53-24.jpg" alt="Tom Clark">
+                <div class="profile-info">
+                    <h3>Tom Clark</h3>
+                    <p>UI/UX Designer</p>
+                </div>
+            </div>
+
+            <div class="profile" onclick="showPopup('Emily Davis', 'Digital Marketer with innovative strategies.')">
+                <img src="images/photo_6_2024-08-22_19-53-24.jpg" alt="Emily Davis">
+                <div class="profile-info">
+                    <h3>Emily Davis</h3>
+                    <p>Digital Marketer</p>
+                </div>
+            </div>
+
+            <div class="profile" onclick="showPopup('Michael Wilson', 'Mobile App Developer with expertise in iOS/Android.')">
+                <img src="images/photo_7_2024-08-22_19-53-24.jpg" alt="Michael Wilson">
+                <div class="profile-info">
+                    <h3>Michael Wilson</h3>
+                    <p>Mobile App Developer</p>
+                </div>
+            </div>
+
+            <div class="profile" onclick="showPopup('Sarah White', 'Social Media Manager boosting online presence.')">
+                <img src="images/photo_8_2024-08-22_19-53-24.jpg" alt="Sarah White">
+                <div class="profile-info">
+                    <h3>Sarah White</h3>
+                    <p>Social Media Manager</p>
+                </div>
+            </div>
+
+            <div class="profile" onclick="showPopup('David Green', 'Project Manager with leadership skills.')">
+                <img src="images/photo_9_2024-08-22_19-53-24.jpg" alt="David Green">
+                <div class="profile-info">
+                    <h3>David Green</h3>
+                    <p>Project Manager</p>
+                </div>
+            </div>
+
+            <div class="profile" onclick="showPopup('Laura Lee', 'Photographer capturing memorable moments.')">
+                <img src="images/photo_10_2024-08-22_19-53-24.jpg" alt="Laura Lee">
+                <div class="profile-info">
+                    <h3>Laura Lee</h3>
+                    <p>Photographer</p>
+                </div>
+            </div>
+
+            <div class="profile" onclick="showPopup('James Black', 'Video Editor creating engaging content.')">
+                <img src="images/photo_11_2024-08-22_19-53-24.jpg" alt="James Black">
+                <div class="profile-info">
+                    <h3>James Black</h3>
+                    <p>Video Editor</p>
+                </div>
+            </div>
+
+            <div class="profile" onclick="showPopup('Sophia Brown', 'Voice Actor with a dynamic range of voices.')">
+                <img src="images/photo_12_2024-08-22_19-53-24.jpg" alt="Sophia Brown">
+                <div class="profile-info">
+                    <h3>Sophia Brown</h3>
+                    <p>Voice Actor</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup -->
+    <div class="popup" id="popup">
+        <h3 id="popup-name">John Doe</h3>
+        <p id="popup-description">Web Developer with 5 years of experience.</p>
+        <p><strong>Requirement:</strong> Payment of $100 to access the full profile and contact details.</p>
+        <div class="actions">
+            <button onclick="closePopup()">Cancel</button>
+            <button>Proceed to Payment</button>
+        </div>
+    </div>
+
+    <!-- Popup and Overlay -->
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <h3 id="popup-name">Name</h3>
+        <p id="popup-description">Description</p>
+        <p id="popup-details">Details</p>
+        <div class="actions">
+            <button class="cancel" onclick="hidePopup()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        function showPopup(name, description, details) {
+            document.getElementById('popup-name').textContent = name;
+            document.getElementById('popup-description').textContent = description;
+            document.getElementById('popup-details').textContent = details;
+            document.getElementById('popup').classList.add('visible');
+            document.getElementById('overlay').classList.add('visible');
+        }
+
+        function hidePopup() {
+            document.getElementById('popup').classList.remove('visible');
+            document.getElementById('overlay').classList.remove('visible');
+        }
+    </script>
+</body>
+</html>

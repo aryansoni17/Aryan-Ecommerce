@@ -161,7 +161,15 @@
         }, 500); // Match this with the preloader fade-out duration
       }, 1000); // Adjust this for preloader duration
     });
+
+    // Redirect to signup page when checkbox is clicked
+    document.getElementById('accept-terms').addEventListener('change', function() {
+      if (this.checked) {
+        window.location.href = 'signup.html'; // Replace 'signup.html' with the actual signup page URL
+      }
+    });
   </script>
 </body>
 </html>
+
 

@@ -11,11 +11,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            font-family: 'Roboto', sans-serif;
+            overflow: auto; /* Allow scrolling */
+            color: #fff;
+            position: relative; /* Ensure pseudo-element is positioned correctly */
             background-image: url("images/Freelancer/Free1.jpg");
             background-size: cover;
             background-position: center;
-            font-family: Arial, sans-serif;
-            overflow: auto; /* Allow scrolling */
         }
 
         /* Preloader styles */
@@ -35,7 +37,7 @@
         .loader {
             border: 16px solid #f3f3f3;
             border-radius: 50%;
-            border-top: 16px solid #007bff;
+            border-top: 16px solid #ff00ff;
             width: 120px;
             height: 120px;
             animation: spin 2s linear infinite;
@@ -51,23 +53,25 @@
             display: none;
         }
 
-        .blur-box {
+        /* Blur effect */
+        .blur-background {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            backdrop-filter: blur(10px);
-            z-index: 0; /* Ensure blur-box is behind the content */
+            backdrop-filter: blur(8px); /* Adjust blur strength as needed */
+            z-index: 0;
         }
 
         .signup-box {
             position: relative;
-            width: 500px;
+            width: 100%;
+            max-width: 600px;
             padding: 40px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.7); /* Slightly opaque black background */
+            border-radius: 20px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
             z-index: 1;
             opacity: 0;
             transform: scale(0.9);
@@ -88,6 +92,28 @@
         .signup-box h2 {
             margin: 0 0 20px;
             text-align: center;
+            background: rgba(255, 0, 255, 0.8);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+            animation: pulse 1.5s infinite;
+            color: #fff;
+            text-shadow: 2px 2px #000;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .signup-box label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ff00ff;
             animation: slideIn 0.5s ease-out;
         }
 
@@ -102,47 +128,56 @@
             }
         }
 
-        .signup-box label {
-            display: block;
-            margin-bottom: 5px;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        .signup-box input[type="text"], .signup-box input[type="password"], .signup-box input[type="email"], .signup-box input[type="tel"], .signup-box textarea {
+        .signup-box input[type="text"], 
+        .signup-box input[type="password"], 
+        .signup-box input[type="email"], 
+        .signup-box input[type="tel"], 
+        .signup-box textarea, 
+        .signup-box select {
             width: 100%;
             padding: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             border: 1px solid #ccc;
-            border-radius: 5px;
-            transition: all 0.3s ease;
+            border-radius: 10px;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
 
-        .signup-box input[type="text"]:focus, .signup-box input[type="password"]:focus, .signup-box input[type="email"]:focus, .signup-box input[type="tel"]:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        .signup-box input[type="text"]:focus, 
+        .signup-box input[type="password"]:focus, 
+        .signup-box input[type="email"]:focus, 
+        .signup-box input[type="tel"]:focus, 
+        .signup-box textarea:focus {
+            border-color: #ff00ff;
+            box-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
         }
 
         .signup-box input[type="submit"] {
-            background: #007bff;
+            background: #00ffff;
             border: none;
-            color: white;
+            color: #000;
             cursor: pointer;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1em;
             transition: background 0.3s, transform 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .signup-box input[type="submit"]:hover {
-            background: #0056b3;
-            transform: scale(1.05);
+            background: #ff00ff;
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
         }
 
         .signup-box a {
             text-decoration: none;
-            color: #007bff;
-            transition: color 0.3s;
+            color: #ff00ff;
+            transition: color 0.3s, transform 0.3s;
         }
 
         .signup-box a:hover {
-            color: #0056b3;
+            color: #00ffff;
+            transform: scale(1.1) rotate(-5deg);
         }
 
         .error-message {
@@ -151,7 +186,6 @@
             margin-top: 10px;
         }
 
-        /* Ensure the content does not overflow the viewport */
         .signup-box textarea {
             height: 100px; /* Adjust as needed */
             resize: vertical; /* Allow vertical resizing only */
@@ -163,27 +197,34 @@
         <div class="loader"></div>
     </div>
 
-    <div class="blur-box"></div>
+    <div class="blur-background"></div>
     <form id="signup-form" class="signup-box" onsubmit="handleSignup(event)">
         <h2>Sign up for FREELANCER</h2>
         <div class="error-message" id="error-message"></div>
         <label for="firstname">First Name:</label>
-        <input type="text" id="firstname" name="firstname" placeholder="Enter your first name"><br>
+        <input type="text" id="firstname" name="firstname" placeholder="Enter your first name" required><br>
         <label for="lastname">Last Name:</label>
-        <input type="text" id="lastname" name="lastname" placeholder="Enter your last name"><br>
+        <input type="text" id="lastname" name="lastname" placeholder="Enter your last name" required><br>
         <label for="email">Email Address:</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email address"><br>
+        <input type="email" id="email" name="email" placeholder="Enter your email address" required><br>
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username" placeholder="Choose a unique username"><br>
+        <input type="text" id="username" name="username" placeholder="Choose a unique username" required><br>
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Enter a strong password"><br>
+        <input type="password" id="password" name="password" placeholder="Enter a strong password" required><br>
         <label for="confirm-password">Confirm Password:</label>
-        <input type="password" id="confirm-password" name="confirm-password" placeholder="Re-enter your password"><br>
+        <input type="password" id="confirm-password" name="confirm-password" placeholder="Re-enter your password" required><br>
         <label for="phone">Phone Number:</label>
-        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number"><br>
-        <label for="skills">Skills:</label>
-        <textarea id="skills" name="skills" placeholder="List your skills, separated by commas"></textarea><br>
-        <input type="checkbox" id="terms" name="terms">
+        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required><br>
+        <label for="primary-skill">Primary Skill:</label>
+        <select id="primary-skill" name="primary-skill" required>
+            <option value="" disabled selected>Select your primary skill</option>
+            <option value="web-development">Web Development</option>
+            <option value="graphic-design">Graphic Design</option>
+            <option value="content-writing">Content Writing</option>
+            <option value="digital-marketing">Digital Marketing</option>
+            <option value="app-development">App Development</option>
+        </select><br>
+        <input type="checkbox" id="terms" name="terms" required>
         <label for="terms">I agree to the <a href="terms.html" id="terms-link">Terms and Conditions</a></label><br><br>
         <input type="submit" value="Sign up" id="signup-btn">
         <p>Already have an account? <a href="login.html" id="login-link">Login now</a></p>
@@ -207,13 +248,27 @@
             const password = document.getElementById('password').value.trim();
             const confirmPassword = document.getElementById('confirm-password').value.trim();
             const phone = document.getElementById('phone').value.trim();
-            const skills = document.getElementById('skills').value.trim();
+            const primarySkill = document.getElementById('primary-skill').value;
             const terms = document.getElementById('terms').checked;
             const errorMessage = document.getElementById('error-message');
 
             // Validate input fields
-            if (firstname === '' || lastname === '' || email === '' || username === '' || password === '' || confirmPassword === '' || phone === '' || skills === '') {
+            if (firstname === '' || lastname === '' || email === '' || username === '' || password === '' || confirmPassword === '' || phone === '' || primarySkill === '') {
                 errorMessage.textContent = 'Please fill out all fields.';
+                return;
+            }
+
+            // Validate email format
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                errorMessage.textContent = 'Please enter a valid email address.';
+                return;
+            }
+
+            // Validate phone number format (simple pattern, adjust as needed)
+            const phonePattern = /^[0-9]{10}$/;
+            if (!phonePattern.test(phone)) {
+                errorMessage.textContent = 'Please enter a valid 10-digit phone number.';
                 return;
             }
 
